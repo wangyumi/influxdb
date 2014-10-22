@@ -920,7 +920,7 @@ func (self *ClusterConfiguration) getShardsToMatchQuery(querySpec *parser.QueryS
 	uniqueShards := make(map[uint32]*ShardData)
 	for _, name := range seriesNames {
 		if fs := self.MetaStore.GetFieldsForSeries(db, name); len(fs) == 0 {
-			return nil, fmt.Errorf("Couldn't look up columns for series: %s", name)
+			return nil, fmt.Errorf("series '%s' does not exist", name)
 		}
 		space := self.getShardSpaceToMatchSeriesName(db, name)
 		if space == nil {
